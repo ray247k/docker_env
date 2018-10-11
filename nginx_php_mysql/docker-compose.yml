@@ -1,0 +1,48 @@
+version: '3'
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - server
+        volumes:
+            - ../../lai_uan_ke/:/var/www/html/lai_uan_ke
+            - ./nginx/dev.laiuanke.com.conf:/etc/nginx/conf.d/dev.laiuanke.com.conf
+            - ./nginx/ssl/:/ssl/
+    php:
+        container_name: php
+        build: ./php/
+        expose:
+            - 9000
+        networks:
+            - server
+            - data
+        volumes:
+            - ../../lai_uan_ke/:/var/www/html/lai_uan_ke    
+    redis:
+        container_name: redis
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        networks:
+            - data
+
+    mysql:
+        container_name: mysql
+        ports:
+            - "3306:3306"
+        image: mysql:latest
+        volumes:
+            - /var/lib/mysql
+        networks:
+            - data
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_USER: host
+            MYSQL_PASSWORD: host
+networks:
+    server:
+    data:
