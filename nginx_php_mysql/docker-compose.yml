@@ -11,6 +11,8 @@ services:
         volumes:
             - ../../lai_uan_ke/:/var/www/html/lai_uan_ke
             - ./nginx/dev.laiuanke.com.conf:/etc/nginx/conf.d/dev.laiuanke.com.conf
+            - ../../botman_PipiCat/:/var/www/html/botman_Pipicat
+            - ./nginx/dev.pipicat.com.conf:/etc/nginx/conf.d/dev.pipicat.com.conf
             - ./nginx/ssl/:/ssl/
     php:
         container_name: php
@@ -21,7 +23,8 @@ services:
             - server
             - data
         volumes:
-            - ../../lai_uan_ke/:/var/www/html/lai_uan_ke    
+            - ../../lai_uan_ke/:/var/www/html/lai_uan_ke
+            - ../../botman_PipiCat/:/var/www/html/botman_Pipicat
     redis:
         container_name: redis
         image: redis:latest
