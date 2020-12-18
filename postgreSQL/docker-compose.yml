@@ -1,0 +1,33 @@
+# named volume
+# version: '3'
+# services:
+#   postgres:
+#     container_name: postgres
+#     ports: 
+#       - "5432:5432"
+#     image: "postgres:alpine"
+#     volumes:
+#       - database-data:/var/lib/postgresql/data # persist data even if container shuts down
+#     restart: always
+#     environment:
+#       POSTGRES_USER: superuser
+#       POSTGRES_PASSWORD: superpassword
+#       POSTGRES_DB: trp
+# volumes: 
+#   database-data: # named volumes can be managed easier using docker-compose
+
+# host valume
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    ports: 
+      - "5432:5432"
+    image: "postgres:alpine"
+    volumes:
+      - ./database_data:/var/lib/postgresql/data # persist data even if container shuts down
+    restart: always
+    environment:
+      POSTGRES_USER: superuser
+      POSTGRES_PASSWORD: superpassword
+      POSTGRES_DB: trp
