@@ -1,0 +1,52 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.18 # stable version
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+        - server
+    volumes:
+      - ./nginx/trip200_trp.conf:/etc/nginx/conf.d/trip200_trp.conf
+      - ./nginx/ssl/:/ssl/
+      - /Users/ray247k/tripresso/trp_backend/:/var/www/html/trp_backend/
+
+  php:
+    container_name: php
+    build: ./php/
+    expose:
+      - 9000
+    networks:
+      - server
+      - data
+    volumes:
+      - /Users/ray247k/tripresso/trp_backend/:/var/www/html/trp_backend/
+
+  redis:
+    container_name: redis
+    image: redis:6.0 # stable version
+    ports:
+      - "6379:6379"
+    networks:
+      - data
+
+  postgre:
+    container_name: postgre
+    ports: 
+      - "5432:5432"
+    image: "postgres:12.5"
+    volumes:
+      - ./database_data:/var/lib/postgresql/data # persist data even if container shuts down
+    networks:
+      - data
+    environment:
+      POSTGRES_USER: trp_user
+      POSTGRES_PASSWORD: trp_password
+      POSTGRES_DB: trp
+    restart: always
+
+networks:
+  server:
+  data:
