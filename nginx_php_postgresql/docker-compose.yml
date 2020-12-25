@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  server:
+  data:
+
 services:
   nginx:
     container_name: nginx
@@ -44,9 +49,5 @@ services:
     environment:
       POSTGRES_USER: trp_user
       POSTGRES_PASSWORD: trp_password
-      POSTGRES_DB: trp
+      POSTGRES_DB: traval_resource_planing
     restart: always
-
-networks:
-  server:
-  data:
