@@ -1,16 +1,58 @@
 kind: pipeline
 type: docker
-name: default
+name: drone-test
 
 steps:
-- name: main-push
+- name: main-push-step_1
+  image: alpine
+  commands:
+  - echo hello
+  - echo main-push_1
+  when:
+    branch:
+      include:
+      - main
+    event:
+      include:
+      - push
+
+- name: main-push-step_2
+  image: alpine
+  commands:
+  - echo world
+  - echo main-push_2
+  when:
+    branch:
+      include:
+      - main
+    event:
+      include:
+      - push
+
+- name: main-push-step_final
+  image: alpine
+  commands:
+  - echo main-push-step_final
+  depends_on:
+  - main-push-step_1
+  - main-push-step_2
+  when:
+    branch:
+      include:
+      - main
+    event:
+      include:
+      - push
+
+- name: dev-push
   image: alpine
   commands:
   - echo hello world
-  - echo main-push
-
-trigger:
-  branch:
-  - main
-  event:
-  - push
+  - echo dev-push
+  when:
+    branch:
+      include:
+      - dev
+    event:
+      include:
+      - push
