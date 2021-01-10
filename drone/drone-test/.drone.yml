@@ -56,3 +56,14 @@ steps:
     event:
       include:
       - push
+
+- name: cron_job
+  image: alpine
+  commands:
+  - echo run cron job
+  when:
+    event:
+    - cron:
+    cron:
+      include:
+      - every2hour
