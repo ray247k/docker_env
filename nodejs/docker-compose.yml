@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  nodejs:
+    container_name: trp_testing_frontend
+    build: ./nodejs/
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - /Users/ray247k/tripresso/trp_frontend/:/usr/src/app
