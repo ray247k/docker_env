@@ -3,9 +3,12 @@ version: '3'
 services:
   nodejs:
     container_name: trp_testing_frontend
-    build: ./nodejs/
+    build:
+      # 設定專案存放的路徑，後面的指令都會在這底下跑
+      context: /Users/ray247k/tripresso/trp_frontend
+
+      # 如果 context 資料夾有 Dockerfile 這行可以省略
+      dockerfile: /Users/ray247k/tripresso/trp_frontend/Dockerfile
     restart: always
     ports:
       - "3000:3000"
-    volumes:
-      - /Users/ray247k/tripresso/trp_frontend/:/usr/src/app
