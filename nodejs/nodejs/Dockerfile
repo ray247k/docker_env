@@ -16,4 +16,6 @@ RUN npm run build
 
 # 設定映像檔內執行的指令
 # CMD ["npm", "run", "dev"]
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
+
+# 如果執行出錯，試試看把所有註解和空行刪掉再執行

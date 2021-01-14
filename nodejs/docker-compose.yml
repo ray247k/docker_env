@@ -7,8 +7,9 @@ services:
       # 設定專案存放的路徑，後面的指令都會在這底下跑
       context: /Users/ray247k/tripresso/trp_frontend
 
-      # 如果 context 資料夾有 Dockerfile 這行可以省略
-      dockerfile: /Users/ray247k/tripresso/trp_frontend/Dockerfile
+      # 設定 Dockerfile 的讀取位置，如果 context 資料夾有 Dockerfile 這行可以省略
+      dockerfile: /Users/ray247k/tripresso/trp_docker_environment/frontend/testing/nodejs/Dockerfile
+
     restart: always
     ports:
       - "3000:3000"
