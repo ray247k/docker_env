@@ -74,15 +74,17 @@ type: ssh
 name: default
 
 server:
-  host: 104.199.137.57
-  user: testing
+  host:
+    from_secret: GCP_IP_HOST
+  user:
+    from_secret: USER_NAME
   ssh_key:
-    from_secret: TESTING_PRIVATE_SSH_KEY
+    from_secret: USER_PRIVATE_SSH_KEY
 
 steps:
   - name: greeting
     commands:
       - echo hello world
       - whoami
-      - cd /home/testing/www/trp_backend
+      - cd /User/project_path
       - pwd
