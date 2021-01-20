@@ -67,3 +67,22 @@ steps:
     cron:
       include:
       - every2hour
+
+---
+kind: pipeline
+type: ssh
+name: default
+
+server:
+  host: 104.199.137.57
+  user: testing
+  ssh_key:
+    from_secret: TESTING_PRIVATE_SSH_KEY
+
+steps:
+  - name: greeting
+    commands:
+      - echo hello world
+      - whoami
+      - cd /home/testing/www/trp_backend
+      - pwd
