@@ -18,6 +18,7 @@ services:
       - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
       - DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO}
       - DRONE_TLS_AUTOCERT=true
+      - DRONE_CRON_INTERVAL=1m
 
   drone-agent:
     container_name: drone_agent
