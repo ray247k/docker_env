@@ -4,6 +4,12 @@ networks:
   server:
   data:
 
+# 可以把多個不同 yml 的容器綁在一個或多個 network 裏面，同時整份 yml 都用同一個 network。如果 network 不存在則需要自建
+#networks:
+#  default:
+#    external:
+#      name: nginx-proxy-production-network
+
 services:
   nginx:
     container_name: nginx
@@ -14,9 +20,9 @@ services:
     networks:
         - server
     volumes:
-      - ./nginx/trip200_trp.conf:/etc/nginx/conf.d/trip200_trp.conf
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./nginx/ssl/:/ssl/
-      - /Users/ray247k/tripresso/trp_backend/:/var/www/html/trp_backend/
+      - /Users/ray247k/my_project/:/var/www/html/my_project/
 
   php:
     container_name: php
@@ -39,7 +45,7 @@ services:
 
   postgre:
     container_name: postgre
-    ports: 
+    ports:
       - "5432:5432"
     image: "postgres:12.5"
     volumes:
