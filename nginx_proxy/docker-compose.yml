@@ -1,0 +1,25 @@
+version: '3'
+
+# 如果多個不同 yml 檔案需要被同一個 nginx proxy 轉發，需要使用自訂的 network
+networks:
+  nginx-proxy-network:
+    external:
+      name: nginx-proxy-network
+  nginx-proxy-production-network:
+    external:
+      name: nginx-proxy-production-network
+
+services:
+  nginx:
+    container_name: trp_proxy_nginx
+    image: nginx:1.18 # stable version
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./ssl/:/ssl/
+    networks:
+      - nginx-proxy-network
+      - nginx-proxy-production-network
+    restart: always
