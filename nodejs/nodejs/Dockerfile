@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14.15.4-alpine
 
 # 設定工作目錄
 WORKDIR /trp_frontend
